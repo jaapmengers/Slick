@@ -2,7 +2,11 @@ import { Channels } from '../collections'
 
 class ChannelRepository {
   join(handle, channel) {
-    return Channels.update({ name: channel }, { $push: { users: handle } });
+    return Channels.update({ name: channel }, { $addToSet: { users: handle } });
+  }
+
+  post(handle, channel, message) {
+    return Channels.update({ name: channel }, { $addToSet: { messages: { handle, message } } });
   }
 
   getChannels() {

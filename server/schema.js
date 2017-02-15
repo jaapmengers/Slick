@@ -1,10 +1,12 @@
 export default `
   type Channel {
     name: String!
+    messages: [Message]
   }
 
-  type Query {
-    channels: [Channel]
+  type Message {
+    handle: String!
+    message: String!
   }
 
   type User {
@@ -12,9 +14,15 @@ export default `
     handle: String!
   }
 
+  type Query {
+    channels: [Channel]
+    channel(name: String!): Channel
+  }
+
   type Mutation {
     register(clientid: String!, handle: String!): User!
     join(handle: String!, channel: String!): Boolean
+    post(handle: String!, channel: String!, message: String!): Boolean
 
     addChannel(name: String!): Channel!
     removeChannel(name: String!): Boolean

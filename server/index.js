@@ -2,7 +2,8 @@ import { createApolloServer } from 'meteor/apollo';
 import { makeExecutableSchema } from 'graphql-tools';
 import schema from './schema';
 import resolvers from './resolvers';
-import ChannelsRepository from './connectors/channels';
+import ChannelRepository from './connectors/channelrepository';
+import UserRepository from './connectors/userrepository';
 
 const executableSchema = makeExecutableSchema({
   typeDefs: schema,
@@ -12,6 +13,7 @@ const executableSchema = makeExecutableSchema({
 createApolloServer({
   schema: executableSchema,
   context: {
-    Channels: new ChannelsRepository(),
+    Channels: new ChannelRepository(),
+    Users: new UserRepository(),
   },
 });

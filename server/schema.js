@@ -7,8 +7,16 @@ export default `
     channels: [Channel]
   }
 
+  type User {
+    clientid: String!
+    handle: String!
+  }
+
   type Mutation {
-    addChannel(name: String!): Channel
+    register(clientid: String!, handle: String!): User!
+    join(handle: String!, channel: String!): Boolean
+
+    addChannel(name: String!): Channel!
     removeChannel(name: String!): Boolean
   }
 

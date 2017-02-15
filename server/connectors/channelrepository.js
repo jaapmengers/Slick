@@ -1,6 +1,10 @@
 import { Channels } from '../collections'
 
-class ChannelsRepository {
+class ChannelRepository {
+  join(handle, channel) {
+    return Channels.update({ name: channel }, { $push: { users: handle } });
+  }
+
   getChannels() {
     return Channels.find().fetch();
   }
@@ -15,4 +19,4 @@ class ChannelsRepository {
   }
 }
 
-export default ChannelsRepository;
+export default ChannelRepository;
